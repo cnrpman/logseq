@@ -5,7 +5,10 @@
             [clojure.string :as string]
             ["electron" :refer [app]]))
 
-(defonce version "0.0.1")
+;; version of the search cache
+;; ver. 0.0.1: initial version
+;; ver. 0.0.2: bump version as page name breaking changes of LogSeq 0.5.7 ~ 0.5.9
+(defonce version "0.0.2")
 
 (defonce databases (atom nil))
 
@@ -51,8 +54,8 @@
     END;"
                   ]]
     (doseq [trigger triggers]
-     (let [stmt (prepare db trigger)]
-       (.run ^object stmt)))))
+      (let [stmt (prepare db trigger)]
+        (.run ^object stmt)))))
 
 (defn create-blocks-table!
   [db]
@@ -144,7 +147,7 @@
   [repo ids]
   (when-let [db (get-db repo)]
     (let [ids (->> (map (fn [id] (str "'" id "'")) ids)
-               (string/join ", "))
+                   (string/join ", "))
           sql (str "DELETE from blocks WHERE id IN (" ids ")")
           stmt (prepare db sql)]
       (.run ^object stmt))))
@@ -224,7 +227,6 @@
 (comment
   (def repo (first (keys @databases)))
   (query repo
-    "select * from blocks_fts")
+         "select * from blocks_fts")
 
-  (delete-db! repo)
-  )
+  (delete-db! repo))
