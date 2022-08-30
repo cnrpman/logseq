@@ -107,7 +107,11 @@
     ["#2中文看来减肥了" "2中文" "中文1999"] "#2中文看来减肥了"
     ["两份健康 #2中文 看来减肥了" "2中文" "中文1999"] "两份健康 #中文1999 看来减肥了"
     ["sdaflk  #2中文   看asdf了" "2中文" "中文1999"] "sdaflk  #中文1999   看asdf了"
-    ["sdaflk  #2中文" "2中文" "中文1999"] "sdaflk  #中文1999"))
+    ["sdaflk  #2中文" "2中文" "中文1999"] "sdaflk  #中文1999"
+
+    ;; #6524
+    ["[[PS Ace]]:: #Yes" "Yes" "Ace"] "[[PS Ace]]:: #Ace"
+    ["PS Ace:: #Yes" "Yes" "Ace"] "PS Ace:: #Ace"))
 
 (deftest test-replace-old-page!
   (are [x y] (= (let [[content old-name new-name] x]
